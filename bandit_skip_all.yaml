@@ -1,0 +1,27 @@
+
+### profile may optionally select or skip tests
+exclude_dirs: [
+  'common/tests/',
+  'common/tools/field_test_log_player',
+  'common/tools/field_test_log_plotter',
+  'common/tools/field_test_logger',
+  'common/tools/python/test',
+  'common/tools/batman/batman_test.py',
+
+  'analyze_bandit_results.py',
+  'check_results.py'
+]
+
+# list skipped tests here:
+skips: [
+  'B104',
+  'B105',
+  'B106',
+  'B201',
+  'B311',
+  'B404',
+  'B602',
+  'B603',
+  'B605',
+  'B607',
+]
