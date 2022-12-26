@@ -39,11 +39,8 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run code analysis tool
-        run: |
-          bandit -c bandit.yaml -r . -f json -o results.json
+        run: bandit -c bandit.yaml -r . -f json -o results.json
 
       - name: Analyze results
         if: always()
-        run: |
-          bandit -c bandit.yaml -r . -f json -o results.json
-          python check_results.py
+        run: python check_results.py
