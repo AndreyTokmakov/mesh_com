@@ -40,4 +40,4 @@ jobs:
 
       - name: Find security issues
         run: |
-          bandit -c bandit_skip_all.yaml -r . -f json -o results.json
+          bandit -c bandit.yaml -r . -f json -o results.json
