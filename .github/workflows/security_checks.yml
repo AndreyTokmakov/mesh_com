@@ -38,7 +38,11 @@ jobs:
           pip install bandit
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Find security issues
+      - name: Run code analysis tool
+        run: |
+          bandit -c bandit.yaml -r . -f json -o results.json
+
+      - name: Analyze results
         run: |
           bandit -c bandit.yaml -r . -f json -o results.json
           python check_results.py
