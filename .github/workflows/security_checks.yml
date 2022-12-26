@@ -43,6 +43,7 @@ jobs:
           bandit -c bandit.yaml -r . -f json -o results.json
 
       - name: Analyze results
+        if: always()
         run: |
           bandit -c bandit.yaml -r . -f json -o results.json
           python check_results.py
