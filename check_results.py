@@ -4,7 +4,10 @@ import subprocess
 from typing import Dict, List
 from enum import Enum
 
-OUTPUT_FILE: str = 'results.json'
+
+OUTPUT_FORMAT: str = "json"
+# OUTPUT_FORMAT: str = "csv"
+OUTPUT_FILE: str = f'results.{OUTPUT_FORMAT}'
 BANDIT_CONFIG_FILE: str = 'bandit.yaml'
 # BANDIT_CONFIG_FILE: str = 'bandit_skip_all.yaml'
 
@@ -16,7 +19,7 @@ class Severity(str, Enum):
     HIGH: str = 'HIGH'
 
     @staticmethod
-    def fromString(severity_str: str) -> Severity:
+    def from_string(severity_str: str) -> Severity:
         try:
             return Severity[severity_str]
         except KeyError as _:
@@ -28,7 +31,7 @@ class Issue(object):
     def __init__(self, entry: Dict) -> None:
         self.id = entry['test_id']
         self.name: str = entry['test_name']
-        self.severity: Severity = Severity.fromString(entry['issue_severity'])
+        self.severity: Severity = Severity.from_string(entry['issue_severity'])
         self.file_line: str = f"{entry['filename']}:{entry['line_number']}"
         self.description: str = entry['issue_text']
 
@@ -52,7 +55,7 @@ def execute_command(cmd: str) -> int:
 
 
 def run_bandit() -> int:
-    cmd: str = f"bandit -c {BANDIT_CONFIG_FILE} -r . -f json -o {OUTPUT_FILE}"
+    cmd: str = f"bandit -c {BANDIT_CONFIG_FILE} -r . -f {OUTPUT_FORMAT} -o {OUTPUT_FILE} --exit-zero"
     return execute_command(cmd)
 
 
@@ -67,16 +70,15 @@ def analyze() -> bool:
     issues: List[Issue] = [Issue(entry) for entry in json_data['results']]
     important_issues: List[Issue] = [issue for issue in issues if
                                      issue.severity == Severity.HIGH or issue.severity == Severity.MEDIUM]
-
-    if not important_issues:
+    if not issues:
         return True
 
-    for issue in important_issues:
+    for issue in issues:
         print(issue)
 
     return False
 
 
 if __name__ == '__main__':
-    # run_bandit()
+    run_bandit()
     result: bool = analyze()

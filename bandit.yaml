@@ -1,6 +1,5 @@
-
-### profile may optionally select or skip tests
 exclude_dirs: [
+  # We don't need to check the unit-test
   'common/tests/',
   'common/tools/field_test_log_player',
   'common/tools/field_test_log_plotter',
@@ -12,7 +11,46 @@ exclude_dirs: [
   'check_results.py'
 ]
 
+tests: [
+  'B602',
+]
+
 # list skipped tests here:
 skips: [
-    # 'B404', # import_subprocess
+  # Vulnerability: Multiple Binds to the Same Port
+  # hardcoded_bind_all_interfaces: Possible binding to all interfaces
+  # TODO: Need to moved to 'test' to run block after fix
+  'B104',
+
+  # Vulnerability: Possible hardcoded password or plain text passwords
+  # CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+  # TODO: Need to moved to 'test' to run block after fix
+  'B105',
+  'B106',
+
+  # Vulnerability: OS Command Injection, Execution of arbitrary code
+  # flask_debug_true: A Flask app appears to be run with debug=True,
+  # CWE: CWE-94 (https://cwe.mitre.org/data/definitions/94.html)
+  # TODO: Need to moved to 'test' to run block after fix
+  'B201',
+
+  # Vulnerability: Password hijacking
+  # Standard pseudo-random generators are not suitable for security/cryptographic purposes
+  # CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+  # TODO: Need to moved to 'test' to run block after fi
+  'B311',
+
+  # import_subprocess: don't need to check that - we do use it
+  'B404',
+
+  # Vulnerability: Shell Injection: possible execution of untrusted input [shell=False]
+  # CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+  'B603',
+
+  # Vulnerability: Shell Injection: Starting a process with a partial executable path
+  # CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+  # TODO: Need to moved to 'test' to run block after fix
+  #       with combination with Shell=True could cause full scale 'Shell Injection'
+  'B607',
+
 ]
