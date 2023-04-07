@@ -12,6 +12,7 @@ Initially, the client sends a request to join the mesh network. This request is 
 ![alt text](../../images/Diagram.png?style=centerme)
 
 
+
 ## Installation
 Firstly we need to install linux dependencies.
 
