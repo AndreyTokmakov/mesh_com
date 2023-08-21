@@ -43,7 +43,6 @@ def run_bandit():
     # exec2(cmd)
 
 
-
 if __name__ == '__main__':
     run_bandit()
 
