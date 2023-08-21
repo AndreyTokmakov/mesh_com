@@ -77,6 +77,8 @@ ExecStart=/bin/sh -c ". /opt/ros/galactic/setup_fog.sh;/opt/ros/galactic/share/b
 WantedBy=multi-user.target
 ```
 
+
+
 Bloom-generate integration to package.sh:
 ```
 $ pushd ../ros2_ws/src/mesh_com/modules/mesh_com

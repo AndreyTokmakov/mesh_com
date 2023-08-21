@@ -24,6 +24,7 @@ docker build \
   --pull \
   -f ./modules/mesh_com/Dockerfile.build_env -t "${iname}_build:${iversion}" .
 
+
 docker run \
   --rm \
   -v $(pwd):/${iname}/sources \
