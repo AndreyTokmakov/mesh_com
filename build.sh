@@ -36,6 +36,4 @@ mkdir -p ${output_dir}
 cp modules/*.deb ${output_dir}
 rm -Rf modules/*.deb
 
-# 33434
-
 exit 0
